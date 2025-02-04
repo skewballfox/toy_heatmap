@@ -156,26 +156,26 @@ impl Heatmap {
                     ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
                     count: None,
                 },
-                // wgpu::BindGroupLayoutEntry {
-                //     binding: 2,
-                //     visibility: wgpu::ShaderStages::FRAGMENT,
-                //     ty: wgpu::BindingType::Buffer {
-                //         ty: wgpu::BufferBindingType::Storage { read_only: true },
-                //         has_dynamic_offset: false,
-                //         min_binding_size: None,
-                //     },
-                //     count: None,
-                // },
-                // wgpu::BindGroupLayoutEntry {
-                //     binding: 3,
-                //     visibility: wgpu::ShaderStages::FRAGMENT,
-                //     ty: wgpu::BindingType::Buffer {
-                //         ty: wgpu::BufferBindingType::Uniform,
-                //         has_dynamic_offset: false,
-                //         min_binding_size: None,
-                //     },
-                //     count: None,
-                // },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 2,
+                    visibility: wgpu::ShaderStages::FRAGMENT,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Storage { read_only: true },
+                        has_dynamic_offset: false,
+                        min_binding_size: None,
+                    },
+                    count: None,
+                },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 3,
+                    visibility: wgpu::ShaderStages::FRAGMENT,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Uniform,
+                        has_dynamic_offset: false,
+                        min_binding_size: None,
+                    },
+                    count: None,
+                },
             ],
         });
         let bind_group = device.create_bind_group(&wgpu::BindGroupDescriptor {
@@ -189,36 +189,36 @@ impl Heatmap {
                     binding: 1,
                     resource: wgpu::BindingResource::Sampler(&sampler),
                 },
-                // wgpu::BindGroupEntry {
-                //     binding: 3,
-                //     resource: wgpu::BindingResource::Buffer(wgpu::BufferBinding {
-                //         buffer: &device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
-                //             label: Some("Scalar Field size"),
-                //             contents: bytemuck::cast_slice(&[width as f32, height as f32]),
-                //             usage: wgpu::BufferUsages::UNIFORM | wgpu::BufferUsages::STORAGE,
-                //         }),
-                //         offset: 0,
-                //         size: Some(
-                //             NonZero::new(2 * std::mem::size_of::<f32>() as wgpu::BufferAddress)
-                //                 .unwrap(),
-                //         ),
-                //     }),
-                // },
-                // wgpu::BindGroupEntry {
-                //     binding: 2,
-                //     resource: wgpu::BindingResource::Buffer(wgpu::BufferBinding {
-                //         buffer: &device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
-                //             label: Some("Gaussian Kernel"),
-                //             contents: bytemuck::cast_slice(&compute_weights(8.0)),
-                //             usage: wgpu::BufferUsages::UNIFORM | wgpu::BufferUsages::STORAGE,
-                //         }),
-                //         offset: 0,
-                //         size: Some(
-                //             NonZero::new(8 * std::mem::size_of::<f32>() as wgpu::BufferAddress)
-                //                 .unwrap(),
-                //         ),
-                //     }),
-                // },
+                wgpu::BindGroupEntry {
+                    binding: 3,
+                    resource: wgpu::BindingResource::Buffer(wgpu::BufferBinding {
+                        buffer: &device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                            label: Some("Scalar Field size"),
+                            contents: bytemuck::cast_slice(&[width as f32, height as f32]),
+                            usage: wgpu::BufferUsages::UNIFORM | wgpu::BufferUsages::STORAGE,
+                        }),
+                        offset: 0,
+                        size: Some(
+                            NonZero::new(2 * std::mem::size_of::<f32>() as wgpu::BufferAddress)
+                                .unwrap(),
+                        ),
+                    }),
+                },
+                wgpu::BindGroupEntry {
+                    binding: 2,
+                    resource: wgpu::BindingResource::Buffer(wgpu::BufferBinding {
+                        buffer: &device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                            label: Some("Gaussian Kernel"),
+                            contents: bytemuck::cast_slice(&compute_weights(8.0)),
+                            usage: wgpu::BufferUsages::UNIFORM | wgpu::BufferUsages::STORAGE,
+                        }),
+                        offset: 0,
+                        size: Some(
+                            NonZero::new(8 * std::mem::size_of::<f32>() as wgpu::BufferAddress)
+                                .unwrap(),
+                        ),
+                    }),
+                },
             ],
             label: Some("diffuse_bind_group"),
         });
