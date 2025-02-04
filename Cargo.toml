@@ -1,0 +1,39 @@
+[package]
+name = "navier_map"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "navier_map"
+crate-type = ["cdylib", "rlib"]
+path = "src/lib.rs"
+
+[[bin]]
+name = "namacli"
+path = "src/main.rs"
+
+[dependencies]
+ndarray = { version = "0.16.1", features = ["serde"] }
+env_logger = "0.11.6"
+log = "0.4.25"
+pollster = "0.4.0"
+wgpu = "24.0.1"
+winit = { version = "0.29", features = ["rwh_05"] }
+cfg-if = "1"
+bytemuck = { version = "1.21.0", features = ["derive"] }
+serde_json = "1.0.138"
+anyhow = "1.0.95"
+ndarray-npy = "0.9.1"
+# the other regular dependencies...
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+console_error_panic_hook = "0.1.6"
+console_log = "1.0"
+wgpu = { version = "24.0.1", features = ["webgl"] }
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4.30"
+web-sys = { version = "0.3", features = ["Document", "Window", "Element"] }
+[dependencies.image]
+version = "0.24"
+default-features = false
+features = ["png", "jpeg"]
