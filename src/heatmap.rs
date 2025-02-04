@@ -1,3 +1,5 @@
+use std::num::NonZero;
+
 use anyhow::*;
 use wgpu::{util::DeviceExt, Texture};
 #[repr(C)]
@@ -44,7 +46,7 @@ pub struct Vertex {
 impl Vertex {
     const VERTEX_ATTRIBUTES: &[wgpu::VertexAttribute] = &wgpu::vertex_attr_array![
         0 => Float32x2,
-        1 => Float32x4,
+        1 => Float32x2,
     ];
     pub fn desc() -> wgpu::VertexBufferLayout<'static> {
         use std::mem;
