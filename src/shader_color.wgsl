@@ -21,7 +21,7 @@ fn vs_main(
 }
 
 
-@group(0) @binding(0) var colormap_texture: texture_multisampled_2d<f32>;
+@group(0) @binding(0) var colormap_texture: texture_2d<f32>;
 @group(0) @binding(1) var colormap_sampler: sampler;
 //@group(0) @binding(2) var data_texture: texture_2d<f32>;
 
